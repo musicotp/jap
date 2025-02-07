@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naam Jap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url("aa.jpg"); /* Replace with your background image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #343a40;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(to right, #e48730, #ce693b);
+            color: #4b0082;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .option-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .option {
+            background: #e2740c;
+            border-radius: 15px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: #343a40;
+            position: relative;
+            border: 2px solid transparent;
+        }
+
+        .option:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+            border-color: #007bff;
+        }
+
+        .option img {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.8rem;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .option:hover img {
+            transform: scale(1.1);
+        }
+
+        .mantra-page {
+            display: none;
+            padding: 4rem;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .mantra-text {
+            font-size: 1.8rem;
+            line-height: 1.9;
+            color: #495057;
+            font-family: 'Noto Sans Devanagari', sans-serif;
+        }
+
+        footer {
+            background-color: #c98130;
+            color: #555;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: auto;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Naam Jap</h1>
+    </header>
+
+    <main>
+        <section id="home">
+            <div class="option-container">
+                <button onclick="window.location.href='radhakrishna.html'" class="option">
+                    <img src="radhakrishna.png" alt="Mantra 2 Icon">
+                    <h2>राधा कृष्ण</h2>
+                </button>
+                <button onclick="window.location.href='hu.html'" class="option">
+                    <img src="shiv.png" alt="Mantra 2 Icon">
+                    <h2>साम्ब सदा शिव</h2>
+                </button>
+<button onclick="window.location.href='radha.html'" class="option">
+    <img src="radha.png" alt="Mantra 2 Icon">
+    <h2>राधा</h2>
+</button>
+<button onclick="window.location.href='raam.html'" class="option">
+    <img src="raam.png" alt="Mantra 2 Icon">
+    <h2>राम</h2>
+</button>
+
+            </div>
+        </section>
+
+        <!-- Mantra Pages -->
+        <section id="mantra1" class="mantra-page">
+            <p class="mantra-text">Mantra 1 text here...</p>
+            <a href="#" class="back-link">Back to Home</a>
+        </section>
+        
+        <!-- Add similar sections for other mantras -->
+        
+    </main>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Naam Jap by |IBP|</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Page navigation
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = option.getAttribute('href');
+                    document.getElementById('home').style.display = 'none';
+                    document.querySelector(targetId).style.display = 'block';
+                });
+            });
+
+            // Back to home functionality
+            document.querySelectorAll('.back-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.getElementById('home').style.display = 'block';
+                    document.querySelectorAll('.mantra-page').forEach(page => {
+                        page.style.display = 'none';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

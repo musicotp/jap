@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naam Jap</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+         body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url("aa.jpg"); /* Replace with your background image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #343a40;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: rgba(219, 86, 8, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 15px;
+            padding: 4rem;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInMoveUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInMoveUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #timer {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        #counter-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        #counter {
+            font-size: 3rem;
+            font-weight: 600;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+            opacity: 1; /* Always visible */
+            animation: none; /* Remove any previous animations */
+            transition: transform 0.3s ease; /* Add transition for bounce */
+        }
+
+        #counter-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #counter-image:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            animation: bounce 0.5s ease;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        button {
+            background: #d42e04;
+            color: rgb(255, 255, 255);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            margin-top: 2rem;
+            text-align: center;
+            animation: slideInFromBottom 1s ease forwards;
+        }
+
+        @keyframes slideInFromBottom {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .mute-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        #mute-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        #mute-button:hover {
+            color: #007bff;
+        }
+
+        #mute-button i {
+            /* Style for the icon if needed */
+        }
+
+        .mantra-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .mantra-option {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .mantra-option img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 0.5rem;
+        }
+
+        .mantra-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        #mantra-display {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .credits {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Bounce Animation for Counter */
+        @keyframes counterBounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px); /* Adjust bounce height */
+            }
+            60% {
+                transform: translateY(-5px); /* Adjust bounce height */
+            }
+        }
+        #floating-counter {
+    position: fixed; /* Stays in place on scroll */
+    top: 20px; /* Adjust top position */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Depth effect */
+    z-index: 1000; /* Ensure it's on top of other content */
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease; /* Smooth fade-in */
+  }
+
+  #floating-counter.show {
+    opacity: 1; /* Shown when count > 0 */
+  }
+
+  #counter-number {
+    /* Add any specific styling for the number here */
+  }
+
+        /* Floating Counter CSS */
+        #floating-counter {
+            position: fixed;
+            top: 20px; /* Adjust top position as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 20px;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* Ensure it's on top */
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        #floating-counter.show {
+            opacity: 1;
+        }
+
+        #counter-number {
+            /* Any specific styling for the number */
+        }
+
+    </style>
+</head>
+<body>
+
+    <audio id="background-audio" autoplay loop preload="auto">
+        <source src="nort.mp3" type="audio/mpeg">
+        <source src="path/to/your/audio.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div id="floating-counter">
+        <span id="counter-number">0</span>
+    </div>
+
+    <div class="container">
+        <h1>Naam Jap</h1>
+        <div id="timer">00:00:00</div>
+
+        <div id="counter-container">
+            <span id="counter">0</span>
+            <img id="counter-image" src="shiv.png" alt="Counter Image">
+        </div>
+
+        
+
+        <div id="mantra-display">अपना नाम जाप प्रारंभ करें</div>
+
+        <button id="reset-button">Reset</button>
+
+        <div class="mute-container">
+            <button id="mute-button">
+                <i id="mute-icon" class="fas fa-volume-up"></i>
+            </button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="credits">
+            Created by Your Name | Icons from Flaticon
+        </div>
+    </footer>
+
+    <script>
+        let startTime = null;
+        let timerInterval;
+        let count = parseInt(localStorage.getItem('naamJapCount')) || 0;
+        let floatingCount = parseInt(localStorage.getItem('myCounter')) || 0; // Floating counter
+
+        const timerDisplay = document.getElementById('timer');
+        const counterDisplay = document.getElementById('counter');
+        const counterImage = document.getElementById('counter-image');
+        const resetButton = document.getElementById('reset-button');
+        const audio = document.getElementById('background-audio');
+        const muteButton = document.getElementById('mute-button');
+        const muteIcon = document.getElementById('mute-icon');
+        const mantraOptions = document.querySelectorAll('.mantra-option');
+        const mantraDisplay = document.getElementById('mantra-display');
+        const floatingCounterDisplay = document.getElementById('counter-number'); // Floating counter
+        const floatingCounter = document.getElementById('floating-counter'); // Floating counter
+
+        let isMuted = false;
+
+        audio.addEventListener('loadeddata', function() {
+            audio.volume = 0.5;
+        });
+
+        floatingCounterDisplay.textContent = floatingCount; // Initialize floating counter display
+
+        function updateTimer() {
+            if (startTime === null) return;
+
+            const currentTime = Date.now();
+            const elapsedTime = currentTime - startTime;
+
+            const seconds = Math.floor((elapsedTime / 1000) % 60);
+            const minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+            const hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+
+            const formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            timerDisplay.textContent = formattedTime;
+        }
+
+        function startTimer() {
+            if (startTime === null) {
+                startTime = Date.now();
+                timerInterval = setInterval(updateTimer, 1000);
+            }
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            startTime = null;
+        }
+
+        counterDisplay.textContent = count;
+
+        counterImage.addEventListener('click', () => {
+            count++;
+            floatingCount++; // Increment floating counter
+            counterDisplay.textContent = count;
+            localStorage.setItem('naamJapCount', count);
+            floatingCounterDisplay.textContent = floatingCount; // Update floating counter display
+            localStorage.setItem('myCounter', floatingCount); // Save floating count
+
+            if (!floatingCounter.classList.contains('show')) {
+                floatingCounter.classList.add('show');
+            }
+
+            if (count === 1) {
+                startTimer();
+            }
+        });
+
+        resetButton.addEventListener('click', () => {
+            count = 0;
+            floatingCount = 0; // Reset floating counter
+            counterDisplay.textContent = count;
+            localStorage.removeItem('naamJapCount');
+            floatingCounterDisplay.textContent = floatingCount; // Update floating counter display
+            localStorage.removeItem('myCounter'); // Remove floating count from storage
+            stopTimer();
+            timerDisplay.textContent = "00:00:00";
+
+            if (floatingCounter.classList.contains('show')) {
+                floatingCounter.classList.remove('show');
+            }
+        });
+
+
+        // Mute Switch
+        muteButton.addEventListener('click', () => {
+            isMuted = !isMuted;
+            audio.muted = isMuted;
+
+            if (isMuted) {
+                muteIcon.classList.remove('fa-volume-up');
+                muteIcon.classList.add('fa-volume-mute');
+            } else {
+                muteIcon.classList.remove('fa-volume-mute');
+                muteIcon.classList.add('fa-volume-up');
+            }
+        });
+
+        mantraOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const mantraText = option.dataset.mantra;
+                mantraDisplay.textContent = mantraText;
+            });
+        });
+
+    </script>
+
+</body>
+</html>
